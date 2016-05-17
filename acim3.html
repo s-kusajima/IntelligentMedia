@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="Kentaro Ueda" content="" />
+    <title>知能メディア特論2016第3回</title>
+    <link rel="stylesheet" type="text/css" href="css/acim3.css" />
+    <script type="text/javascript" src="js/libraries/jquery.js"></script>
+    <script type="text/javascript" src="js/acim3.js"></script>
+</head>
+
+<body>
+    <h1>知能メディア特論2016 第3回 サンプルプログラム</h1>
+    <h2>jQueryの練習(3) Ajax</h2>
+    
+    <p>演習用資料は <a href="https://github.com/KentaroUeda/AdvancedCourseOfIntelligentMedia">GitHub</a> にあります．</p>
+    
+    <form class="jQuerySamples" id="queryInputArea">
+        <input type="text" id="query" size="30" placeholder="検索キーワードを入力"/>
+        <input type="text" id="query" size="30" style="display:none;"/>
+        <div class="button" id="searchButton">検索</div>
+    </form>
+    
+    <div class="jQuerySamples" id="resultArea">
+        <h3>Ajax で CiNii の記事を検索する</h3>
+        <div id="resultsWrapper">
+            <!-- results のテンプレート -->
+            <!--div class="results fade">
+                <p class="resultTitle">公立はこだて未来大学</p>
+                <p>説明文...</p>
+                <div class="resultDeleteButton fade">Delete</div>
+            </div-->
+        </div>
+    </div>
+    
+</body>
+
+</html>
