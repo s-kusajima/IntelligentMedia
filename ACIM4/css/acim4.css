@@ -1,0 +1,152 @@
+html {
+    background-color: #e6e9e9;
+    background-image: -webkit-linear-gradient(270deg,rgb(230,233,233) 0%,rgb(216,221,221) 100%);
+    background-image: linear-gradient(270deg,rgb(230,233,233) 0%,rgb(216,221,221) 100%);
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    margin: 0 auto;
+    padding: 2em 2em 4em;
+    width: 800px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5em;
+    color: #545454;
+    background-color: #ffffff;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.06);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.3em;
+}
+
+h2, h3, input{
+    margin-top: 0px;
+}
+
+h3, input{
+    margin-left: 10px;
+}
+
+b, strong, .strong{
+    font-weight: 600;
+}
+
+img {
+    -webkit-animation: colorize 2s cubic-bezier(0, 0, .78, .36) 1;
+    animation: colorize 2s cubic-bezier(0, 0, .78, .36) 1;
+    background: transparent;
+    border: 10px solid rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    display: block;
+    margin: 1.3em auto;
+    max-width: 95%;
+}
+
+.button{
+    position: relative;
+    height:25px;
+    float: left;
+    padding-left : 8px;
+    padding-right: 8px;
+    border: solid 0px;
+    background-color: #60a9ff;
+    border-radius: 5px;
+    font-size: 18px;
+    color:#4e4e4e;
+    text-align: center;
+    cursor:pointer;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    user-select        : none; /* マウスドラッグで文字を選択状態にしない */
+    -moz-user-select   : none; 
+    -webkit-user-select: none; 
+    -ms-user-select    : none;
+}
+
+p {
+    margin: 0;
+}
+
+.button:hover{
+    background-color: #8ec2ff;
+}
+
+.button:active{
+    background-color: #c0ddff;
+    background-color: #c0ddff;
+}
+
+.clear {
+    clear:both;
+}
+
+@-webkit-keyframes colorize {
+    0% {
+    -webkit-filter: grayscale(100%);
+    }
+    100% {
+    -webkit-filter: grayscale(0%);
+    }
+}
+
+@keyframes colorize {
+    0% {
+    filter: grayscale(100%);
+    }
+    100% {
+    filter: grayscale(0%);
+    }
+}
+
+/* ここから: 要素がクリックされた時にHTMLを書き換える */
+
+.jQuerySamples{
+    position: relative;
+    width: 700px;    
+    margin: 0 auto;
+    margin-top: 10px;
+    padding-top: 10px;
+    background-color: #d9d9d9;
+}
+
+#graphArea{
+    height: 420px;
+}
+
+#myCanvas {
+    position: absolute;
+    top: 0px;
+    background-color: black;
+}
+
+#canvasWrapper{
+    position: relative;
+    height: 400px;
+    top:-10px;
+    width: inherit;
+    background-color: rgba(0, 26, 65, 0.45);
+}
+
+#graphControllerArea{
+    top:-20px;
+    border-left: solid 0px;
+    padding-top:3px;
+    padding-bottom:3px;
+    background-color: #828282;
+}
+
+#frequencyValue{
+    position: relative;
+    left: 10px;
+}
+
+#frequencySlider{
+    position: relative;
+    width: 600px;
+    left: 12px;
+    margin-top: 4px;
+}
