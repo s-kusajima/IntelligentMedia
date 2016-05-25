@@ -11,9 +11,9 @@ appInit = function () {
     'use strict';
     
 //    drawGridChart: 座標軸を描画　drawGraph: sin波を描画
-    var drawGridChart, drawGraph,
+    var drawGridChart, drawGraph, drawOuterCircle,
         $canvas          = $('#myCanvas'),              // html 上の canvas 要素を id を指定して取得．
-        canvasCtx        = $canvas[0].getContext('2d'), // canvas を利用する際はコンテキストを取得する必要があります．             
+        canvasCtx        = $canvas[0].getContext('2d'), // canvas を利用する際はコンテキストを取得する必要があります．           
                                                         // この書き方はお決まりなので，覚えてしまって良いです．
         row              = 3,  // 座標の y 軸の目盛りの数
         col              = 1,  // 座標の x 軸の目盛りの数
@@ -54,6 +54,24 @@ appInit = function () {
         })()
     ;
     
+    
+    drawOuterCircle = function () {
+        
+        canvasCtx.fillStyle = "rgb(255, 255, 255)";
+        canvasCtx.fillRect(0, 0, canvasCtx.canvas.width, canvasCtx.canvas.height);
+        
+        canvasCtx.beginPath();
+        canvasCtx.fillStyle = "rgb(255, 255, 0)";
+        canvasCtx.arc(canvasCtx.canvas.width / 2 ,canvasCtx.canvas.height / 2, canvasCtx.canvas.height / 3 ,0 ,2 * Math.PI,true);
+        canvasCtx.stroke();
+        canvasCtx.closePath();
+        
+        console.log("test");
+        
+    };
+    
+    
+    
     // gridProp に基づき座標系を描画
     drawGridChart = function () {
 
@@ -68,7 +86,7 @@ appInit = function () {
         // 参考... http://www.htmq.com/canvas/lineTo.shtml
         
         // y 軸を描画
-        canvasCtx.beginPath(); 
+        canvasCtx.beginPath();
         canvasCtx.moveTo(gridProp.y.center, gridProp.y.start); // 線の始点を指定
         canvasCtx.lineTo(gridProp.y.center, gridProp.y.end  ); // 線の終点を指定
         canvasCtx.stroke();　//  パスを描写．
@@ -99,7 +117,9 @@ appInit = function () {
             canvasCtx.fillText(label , gridProp.y.plotPoint[i].x, gridProp.y.plotPoint[i].y);  // x 軸より上の y 軸目盛りを描画
         }
     };
+    
 
+    
     // sin 波を描画．    
     drawGraph = function (frequency, mode) {
 
@@ -142,6 +162,7 @@ appInit = function () {
         canvasCtx.closePath();    
 
     };
+    
 
     
     (function init(){
@@ -150,10 +171,11 @@ appInit = function () {
             frequencyValue   = $('#frequencyValue')
         ;
 
-        drawGridChart();
+        drawOuterCircle();
+//        drawGridChart();
         frequencySlider.on('change mousemove mousedown', function(){
-            drawGraph($(this).val(), 0);
-            frequencyValue.text(String() + ($(this).val() * col) + 'Hz');
+//            drawGraph($(this).val(), 0);
+//            frequencyValue.text(String() + ($(this).val() * col) + 'Hz');
         });
     })();
 };
