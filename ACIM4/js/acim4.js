@@ -11,14 +11,25 @@ appInit = function () {
     'use strict';
     
 //    drawGridChart: 座標軸を描画　drawGraph: sin波を描画
-    var drawGridChart, drawGraph, drawOuterCircle,
+    var drawGridChart, drawGraph, clearCanvas, drawOuterCircle, drawInnerCircle,
         $canvas          = $('#myCanvas'),              // html 上の canvas 要素を id を指定して取得．
         canvasCtx        = $canvas[0].getContext('2d'), // canvas を利用する際はコンテキストを取得する必要があります．           
                                                         // この書き方はお決まりなので，覚えてしまって良いです．
+        startButton      = $('#startButton'),
         row              = 3,  // 座標の y 軸の目盛りの数
         col              = 1,  // 座標の x 軸の目盛りの数
         MARGIN           = 15, // 目盛りを描画する際の余白
         AXIS_Y_MARGIN    = 50, // y 軸左側の余白
+        
+        center           = {x: canvasCtx.canvas.width / 2.0,
+                            y: canvasCtx.canvas.height / 2.0
+                           },
+        ocr              = canvasCtx.canvas.height / 2.2, // ≒ 182
+        icr              = 100,
+        rad              = 0,
+        
+        doDraw           = false,
+        
         gridProp         = (function () { // 座標系の描画位置を計算
 
             var prop = {
@@ -54,22 +65,38 @@ appInit = function () {
         })()
     ;
     
-    
-    drawOuterCircle = function () {
+    clearCanvas = function () {
         
         canvasCtx.fillStyle = "rgb(255, 255, 255)";
         canvasCtx.fillRect(0, 0, canvasCtx.canvas.width, canvasCtx.canvas.height);
         
+    }
+    
+    drawOuterCircle = function () {
+        
         canvasCtx.beginPath();
-        canvasCtx.fillStyle = "rgb(255, 255, 0)";
-        canvasCtx.arc(canvasCtx.canvas.width / 2 ,canvasCtx.canvas.height / 2, canvasCtx.canvas.height / 3 ,0 ,2 * Math.PI,true);
+//        canvasCtx.fillStyle = "rgb(255, 255, 0)";
+        canvasCtx.arc(center.x ,center.y, ocr, 0, 2 * Math.PI, true);
         canvasCtx.stroke();
         canvasCtx.closePath();
         
-        console.log("test");
-        
     };
     
+    drawInnerCircle = function () {
+        
+        clearCanvas();
+        drawOuterCircle();
+        
+        var icx = center.x + (ocr - icr) * Math.cos(rad / 180 * Math.PI);
+        var icy = center.y + (ocr - icr) * Math.sin(rad / 180 * Math.PI);
+        canvasCtx.beginPath();
+        canvasCtx.arc(icx, icy, icr, 0, 2 * Math.PI, true);
+        canvasCtx.stroke();
+        canvasCtx.closePath();
+        
+        rad++;
+        
+    };
     
     
     // gridProp に基づき座標系を描画
@@ -163,7 +190,18 @@ appInit = function () {
 
     };
     
-
+    startButton.click(function () {
+       
+        doDraw = true;
+        console.log("pushed startbutton");
+        
+        startButton.text("描画中止");
+    });
+    
+//    var ddd = setInterval(drawInnerCircle, 20);
+    var ddd = setInterval(function(){
+        if(doDraw) drawInnerCircle();
+    }, 5);
     
     (function init(){
         
@@ -171,7 +209,9 @@ appInit = function () {
             frequencyValue   = $('#frequencyValue')
         ;
 
+        clearCanvas();
         drawOuterCircle();
+        drawInnerCircle();
 //        drawGridChart();
         frequencySlider.on('change mousemove mousedown', function(){
 //            drawGraph($(this).val(), 0);
