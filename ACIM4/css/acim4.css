@@ -9,6 +9,7 @@ body {
     margin: 0 auto;
     padding: 2em 2em 4em;
     width: 800px;
+    height: 620px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 16px;
     line-height: 1.5em;
@@ -132,33 +133,44 @@ p {
 }
 
 #graphControllerArea{
+    float: left;
     top:-20px;
     border-left: solid 0px;
     padding-top:3px;
     padding-bottom:3px;
-    background-color: #828282;
+    background-color: darkgray;
 }
 
 #frequencyValue{
     position: relative;
-    left: 10px;
+    left: 45px;
+    width: 30px;
+    top: -4px;
 }
 
 #frequencySlider{
     position: relative;
+/*    vertical-align: center;*/
     width: 600px;
-    left: 12px;
-    margin-top: 4px;
+    left: 40px;
+    margin-top: 6px;
 }
 
 #startButton{
     margin-top: 10px;
-}
-
-#stopButton{
-    margin-top: 10px;
+    position: relative;
+    border-left: solid 0px;
 }
 
 #clearButton{
     margin-top: 10px;
+    position: relative;
+    border-left: solid 0px;
+}
+
+#selectColor{
+    margin-left: 20px;
+    margin-top: 10px;
+    position: relative;
+    width: 200px;
 }

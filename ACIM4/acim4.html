@@ -11,24 +11,26 @@
 </head>
 
 <body>
-    <h1>知能メディア特論2016 第4回 サンプルプログラム</h1>
-    <h2>Canvas</h2>
+    <h1>知能メディア特論2016 第4回 くさじまプログラム</h1>
+    <h2>Canvas - Spirograph</h2>
     
-    <p>演習用資料は <a href="https://github.com/KentaroUeda/AdvancedCourseOfIntelligentMedia">GitHub</a> にあります．</p>
-
     <div class="jQuerySamples" id="graphArea">
         <div id="loader"></div>
         <div id="canvasWrapper">
             <canvas id="myCanvas" width="700px" height="400px"></canvas>
         </div>
         
-<!--        周波数を調整するためのスライダー-->
         <form class="jQuerySamples" id="graphControllerArea">
-            <span id="frequencyValue">0</span>
-            <input type="range" id="frequencySlider" max="5" min="0" value = "0" />
+            <input type="range" id="frequencySlider" max="180" min="10" value = "100" />
+            <span id="frequencyValue">100</span>
+            <div id="selectColor">
+                <input type="radio" name="color" value="red" checked>Red
+                <input type="radio" name="color" value="green" >Green
+                <input type="radio" name="color" value="blue" >Blue
+            </div>
             <div class="button" id="startButton">描画開始</div>
-            <div class="button" id="stopButton">描画終了</div>
             <div class="button" id="clearButton">クリア</div>
+            
         </form>
         
     </div>
