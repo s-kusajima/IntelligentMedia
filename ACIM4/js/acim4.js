@@ -21,20 +21,19 @@ appInit = function () {
         array            = [],
         lineColor        = "rgb(255, 0, 0)",
         
-        doDraw           = false
-    ;
+        doDraw           = false;
     
     clearCanvas = function () {
         
         canvasCtx.fillStyle = "rgb(255, 255, 255)";
         canvasCtx.fillRect(0, 0, canvasCtx.canvas.width, canvasCtx.canvas.height);
-    }
+    };
     
     drawOuterCircle = function () {
         
         canvasCtx.beginPath();
         canvasCtx.strokeStyle = "rgb(0, 0, 0)";
-        canvasCtx.arc(center.x ,center.y, ocr, 0, 2 * Math.PI, true);
+        canvasCtx.arc(center.x, center.y, ocr, 0, 2 * Math.PI, true);
         canvasCtx.stroke();
         canvasCtx.closePath();
     };
@@ -44,19 +43,19 @@ appInit = function () {
         clearCanvas();
         drawOuterCircle();
         
-        var icx = center.x + (ocr - icr) * Math.cos(rad / 180 * Math.PI); // inner center x
-        var icy = center.y + (ocr - icr) * Math.sin(rad / 180 * Math.PI); // inner center y
+        var icx = center.x + (ocr - icr) * Math.cos(rad / 180 * Math.PI), // inner center x
+            icy = center.y + (ocr - icr) * Math.sin(rad / 180 * Math.PI); // inner center y
         canvasCtx.beginPath();
         canvasCtx.strokeStyle = "rgb(0, 0, 0)";
         canvasCtx.arc(icx, icy, icr, 0, 2 * Math.PI, true);
         canvasCtx.stroke();
         canvasCtx.closePath();
         
-        var px = icx + icr * Math.cos((ocr - icr) / icr * rad / 180 * Math.PI); // point x
-        var py = icy - icr * Math.sin((ocr - icr) / icr * rad / 180 * Math.PI); // point y
+        var px = icx + icr * Math.cos((ocr - icr) / icr * rad / 180 * Math.PI), // point x
+            py = icy - icr * Math.sin((ocr - icr) / icr * rad / 180 * Math.PI); // point y
         
         var c = $('input[name=color]:checked').val();
-        switch(c){
+        switch (c) {
             case "red":
                 lineColor = "rgb(255, 0, 0)";
                 break;
@@ -78,18 +77,10 @@ appInit = function () {
         array.push(obj);
         
         /*
-        canvasCtx.beginPath();
-        canvasCtx.strokeStyle = "rgb(255, 0, 0)";
-        canvasCtx.moveTo(array[0].x, array[0].y);
-        for(var i = 1; i < array.length; i++){
-            canvasCtx.lineTo(array[i].x, array[i].y);
-        }
-        canvasCtx.stroke();
-        */
-        
-        for(var i = 1; i < array.length; i++){
+        for (var i = 1; i < array.length; i++) {
             
-            if(array[i - 1].r != array[i].r) continue;
+            if (array[i - 1].r != array[i].r) continue;
+            
             canvasCtx.beginPath();
             canvasCtx.strokeStyle = array[i].c;
             canvasCtx.moveTo(array[i - 1].x, array[i - 1].y);
@@ -97,16 +88,46 @@ appInit = function () {
             canvasCtx.stroke();
             canvasCtx.closePath();
         }
+        */
+        
+        /*
+            ・途中で線の色を変える
+            ・
+        */
+        canvasCtx.beginPath();
+        canvasCtx.strokeStyle = array[0].c;
+        canvasCtx.moveTo(array[0].x, array[0].y);
+        for (var i = 1; i < array.length; i++) {
+            if (array[i - 1].r == array[i].r) {
+                if (array[i - 1].c == array[i].c) {
+                    canvasCtx.lineTo(array[i].x, array[i].y);
+                } else {
+                    canvasCtx.stroke();
+                    canvasCtx.closePath();
+                    canvasCtx.beginPath();
+                    canvasCtx.strokeStyle = array[i].c;
+                    canvasCtx.moveTo(array[i - 1].x, array[i - 1].y);
+                    canvasCtx.lineTo(array[i].x, array[i].y);
+                }
+            } else {
+                canvasCtx.stroke();
+                canvasCtx.closePath();
+                canvasCtx.beginPath();
+                canvasCtx.moveTo(array[i].x, array[i].y);
+            }
+        }
+        canvasCtx.stroke();
+        canvasCtx.closePath();
         
         rad += 5;
     };
     
     startButton.click(function () {
        
-        if(!doDraw){   
+        if (!doDraw) {   
             doDraw = true;
             startButton.text("描画停止");
-        }else{
+        } else {
             doDraw = false;
             startButton.text("描画開始");
         }
@@ -114,9 +135,9 @@ appInit = function () {
     
     clearButton.click(function () {
         
-        if(doDraw){
+        if (doDraw) {
             doDraw = false;
-            startButton.text("描画停止");
+            startButton.text("描画開始");
         }
         
         rad = 0.0;
@@ -125,19 +146,19 @@ appInit = function () {
         drawInnerCircle();
     });
 
-    var ddd = setInterval(function(){
-        if(doDraw) drawInnerCircle();
+    setInterval(function () {
+        if (doDraw) drawInnerCircle();
     }, 20);
+    // request animation frame
     
-    (function init(){
-        
+    (function init () {
         
         var frequencySlider  = $('#frequencySlider'),
             frequencyValue   = $('#frequencyValue')
         ;
         
         drawInnerCircle();
-        frequencySlider.on('change', function(){
+        frequencySlider.on('change', function () {
             frequencyValue.text(String() + $(this).val());
             icr = $(this).val();
             rad = 0.0;
@@ -147,8 +168,7 @@ appInit = function () {
     })();
 };
 
-
-$(function main(){ 
+$(function main () { 
     'use strict';
     appInit();
 });
