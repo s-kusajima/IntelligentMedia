@@ -90,10 +90,6 @@ appInit = function () {
         }
         */
         
-        /*
-            ・途中で線の色を変える
-            ・
-        */
         canvasCtx.beginPath();
         canvasCtx.strokeStyle = array[0].c;
         canvasCtx.moveTo(array[0].x, array[0].y);
